@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "dist/oshop-3",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
