@@ -1,10 +1,17 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
   <a class="navbar-brand" routerLink="/">O</a>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/shopping-cart">ShoppingCart</a>
+        <a class="nav-link" routerLink="/shopping-cart">
+          ShoppingCart
+          <span
+            *ngIf="cart$ | async as cart"
+            class="badge text-warning bg-warning text-dark"
+            >{{ cart.totalItemsCount }}</span
+          >
+        </a>
       </li>
       <ng-template #anonymousUser>
         <li class="nav-item">

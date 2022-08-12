@@ -1,1 +1,99 @@
-<p>check-out works!</p>
+<div class="row">
+  <div class="col">
+    <form #f="ngForm" (ngSubmit)="placeOrder(f.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          required
+          ngModel
+          name="name"
+          #name="ngModel"
+          id="name"
+          type="text"
+          class="form-control"
+        />
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors?.['required']">Name is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <div class="input-group mb-3">
+          <input
+            required
+            ngModel
+            name="address"
+            #address="ngModel"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="address.touched && address.invalid"
+        >
+          <div *ngIf="address.errors?.['required']">Address is required.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address2"></label>
+        <div class="input-group mb-3">
+          <input
+            ngModel
+            name="address2"
+            #address2="ngModel"
+            type="text"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <div class="input-group mb-3">
+          <input
+            required
+            ngModel
+            name="city"
+            #city="ngModel"
+            type="text"
+            class="form-control"
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+          <div *ngIf="city.errors?.['required']">City is required.</div>
+        </div>
+      </div>
+      <button class="btn btn-primary">Place Order</button>
+    </form>
+  </div>
+  <div class="col">
+    <ng-container *ngIf="cart$ | async as cart">
+      <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart.items">
+            <td>{{ item.product.title }}</td>
+            <td>
+              {{ item.quantity }}
+            </td>
+            <td>{{ item.totalPrice | currency: "AUD" }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>{{ cart.totalPrice | currency: "AUD" }}</th>
+          </tr>
+        </tfoot>
+      </table>
+    </ng-container>
+  </div>
+</div>
