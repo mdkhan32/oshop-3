@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col">
-    <form #f="ngForm" (ngSubmit)="placeOrder(f.value)">
+    <form #f="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
         <input
           required
-          ngModel
           name="name"
           #name="ngModel"
+          [(ngModel)]="shipping.name"
           id="name"
           type="text"
           class="form-control"
@@ -21,7 +21,7 @@
         <div class="input-group mb-3">
           <input
             required
-            ngModel
+            [(ngModel)]="shipping.address"
             name="address"
             #address="ngModel"
             type="text"
@@ -39,7 +39,7 @@
         <label for="address2"></label>
         <div class="input-group mb-3">
           <input
-            ngModel
+            [(ngModel)]="shipping.address2"
             name="address2"
             #address2="ngModel"
             type="text"
@@ -52,7 +52,7 @@
         <div class="input-group mb-3">
           <input
             required
-            ngModel
+            [(ngModel)]="shipping.city"
             name="city"
             #city="ngModel"
             type="text"
@@ -63,11 +63,13 @@
           <div *ngIf="city.errors?.['required']">City is required.</div>
         </div>
       </div>
-      <button class="btn btn-primary">Place Order</button>
+      <button (click)="placeOrder()" class="btn btn-primary">
+        Place Order
+      </button>
     </form>
   </div>
   <div class="col">
-    <ng-container *ngIf="cart$ | async as cart">
+    <ng-container *ngIf="cart">
       <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
       <table class="table">
         <thead>
